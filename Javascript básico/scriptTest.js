@@ -1,0 +1,10 @@
+const confirma = confirm("Realmente deseja apagar?")
+window.alert('Mensagem')
+window.confirm("Deseja realmente apagar?")
+window.prompt("Digite o seu nome:")
+
+let num1 = prompt('Digite um valor: ')
+let num2 = prompt('Digite um valor: ')
+num1 = Number(num1)
+num2 = Number(num2)
+window.alert(`O resultado é ${num1 + num2}`)
