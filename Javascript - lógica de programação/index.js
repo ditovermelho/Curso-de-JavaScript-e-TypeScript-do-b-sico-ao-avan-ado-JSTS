@@ -267,5 +267,37 @@ console.log(list2[2]);
 */
 
 /* Atribuição via desestruturação (Objetos):
+const pessoa = {
+    nome: 'Luiz',
+    sobrenome: 'Miranda',
+    idade: 30,
+    endereco: {
+        rua: 'Av Brasil',
+        numero: 320
+    }
+};
+
+const { nome: teste = '', sobrenome, endereco: { rua, numero }, ...resto } = pessoa;
+
+console.log(teste, sobrenome, rua, numero, resto);
 
 */
+
+/* For - Clássico - Estrutura de repetição:
+for (let i = 0; i <= 5; i++) {
+    console.log(`Linha ${i}`)
+}
+
+for (let i = 0; i <= 10; i++) {
+    const par = i % 2 === 0 ? 'par' : 'ímpar';
+    console.log(`O número ${i} é ${par}`)
+}
+
+const frutas = ['Maçã', 'Pêra', 'Uva'];
+
+for (let i = 0; i < frutas.length; i++) {
+    console.log(`O item ${i} é ${frutas[i]}`)
+}
+
+*/
+
