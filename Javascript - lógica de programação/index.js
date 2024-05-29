@@ -1,5 +1,4 @@
-/*
-Operadores de comparação:
+/* Operadores de comparação:
 > Maior que
 >= Maior que ou igual a
 < menor que
@@ -13,8 +12,9 @@ const num = 10;
 const num1 = '10';
 const comp = num === num1;
 console.log(comp);
+*/
 
-Operadores Lógicos:
+/* Operadores Lógicos:
 && -> ANd -> E -> Todas as expressões precisam ser verdadeiras para retornar true
 || -> OR -> OU -> Precisam que uma das expressões seja verdadeira para retornar true
 ! -> NOT -> NÂO ->
@@ -33,8 +33,9 @@ const senha = '123456'; // form digitado pelo usuário
 const vaiLogar = usuario === 'Luiz' && senha === '123456';
 
 console.log(vaiLogar);
+*/
 
-Operadores condiçionais:
+/* Operadores condiçionais:
 if -> Se a condição desse bloco for verdadeira, executa o bloco da condição
 else if -> Se a condição do outro bloco não for verdadeiro e a desse bloco for verdadeiro, executa esse bloco da condição
 else -> Se a condição do bloco não for verdadeira, executa esse o bloco da condição
@@ -64,8 +65,9 @@ if (tenhoGrana){
 }else{
     console.log('Não vou sair de casa');
 }
+*/
 
-Operação ternária:
+/* Operação ternária:
 ? :
 
 const pontuacaoUsuario = 999;
@@ -79,8 +81,9 @@ if (pontuacaoUsuario >= 1000){
 const nivelUsuario = pontuacaoUsuario >= 1000 ? 'Usuário VIP' : 'Usuário normal';
 
 console.log(nivelUsuario);
+*/
 
-Objeto Date:
+/* Objeto Date:
 
 const data = new Date();
 
@@ -124,8 +127,9 @@ const data = new Date();
 const dataBrasil = formataData(data);
 
 console.log(dataBrasil);
+*/
 
-Switch/Case:
+/* Switch/Case:
 
 const data = new Date('1987-04-21 00:00:00')
 const diaSemana = data.getDay();
@@ -212,6 +216,56 @@ const diaSemana = data.getDay();
 const diaSemanaTexto = getDayWeek(diaSemana);
 
 console.log(diaSemana, diaSemanaTexto)
+*/
+
+/* Mais diferenças entre var e let/const:
+
+let tem escopo de bloco {... bloco};
+var só tem escopo de função
+
+const verdadeira = true;
+
+let nome = 'Luiz'; // criando
+var nome2 = 'Otávio'; // criando
+
+console.log(nome, nome2);
+
+if (verdadeira){
+    let nome = 'Otávio'; // criando
+    var nome2 = 'Rogério'; // redeclatando
+
+    console.log(nome, nome2);
+
+    if (verdadeira) {
+        let nome = 'Outra coisa'; // criando
+        var nome2 = 'Outra coisa'; // redeclatando
+
+        console.log(nome, nome2);
+    }
+}
+
+console.log(nome, nome2);
 
 */
 
+/* Atribuição via desestruturação (Arrays):
+... rest, ... spread
+
+const numeros = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
+const [um, , tres, , cinco, ...resto] = numeros;
+
+console.log(um, tres, cinco);
+console.log(resto);
+
+const numeros = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+const [,[,,seis]] =numeros;
+console.log(seis);
+
+const numeros = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+const [list1, list2, list3] =numeros;
+console.log(list2[2]);
+*/
+
+/* Atribuição via desestruturação (Objetos):
+
+*/

@@ -1,4 +1,4 @@
-/* 
+/* Introdução:
 let num = 15; // variavel 
 let name = 'Carlos Daniel'; // variavel 
 console.log('Hello world!', "Good Day"); // print no console do navegador
@@ -96,8 +96,16 @@ console.log(9 ** (1/2)); // Raiz quadrada
 console.log(9 ** (0.5)); // Raiz quadrada
 
 console.log(100 / 0); // valor infinito, quanto mais proximo do zero absoluto for o resultado sera infinito, esse retorno e True
+*/
 
-// Arrays (Básico)
+/* Tipos de dados Primitivos (imutáveis):
+    string, number, boolean, undefined, null (bigint, symbol)
+
+Tipos de dados Referência (mutável):
+    array, object, function
+*/
+
+/* Arrays (Básico):
 const alunos = ['Luiz', 'Maria', 'João'];
 
 console.log(alunos);
@@ -133,8 +141,9 @@ delete alunos[1]; // Remove o elemento de um index do array mas mantem o index
 console.log(alunos);
 
 console.log(alunos.slice(0, -1)); // Acessa interlalos pre definidos do array
+*/
 
-// Funções
+/* Funções:
 function saudacao(nome){
     return `Bom dia ${nome}!`;
 }
@@ -223,10 +232,5 @@ pessoa1.falaIdade();
 pessoa1.incrementaIdade();
 pessoa1.falaIdade();
 
-// Tipos de dados Primitivos (imutáveis): 
-    string, number, boolean, undefined, null (bigint, symbol)
-
-// Tipos de dados Referência (mutável):
-    array, object, function
 */
 
