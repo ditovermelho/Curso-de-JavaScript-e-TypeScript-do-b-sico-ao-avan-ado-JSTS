@@ -284,6 +284,7 @@ console.log(teste, sobrenome, rua, numero, resto);
 */
 
 /* For - Clássico - Estrutura de repetição:
+Geralmente com iteráveis (array ou strings)
 for (let i = 0; i <= 5; i++) {
     console.log(`Linha ${i}`)
 }
@@ -299,5 +300,72 @@ for (let i = 0; i < frutas.length; i++) {
     console.log(`O item ${i} é ${frutas[i]}`)
 }
 
+For simplificado
+nome.forEach(function(valor, indice){
+    console.log(`${indice}: ${valor}`);
+});
+
+*/
+
+/* For - in - Estrutura de repetição:
+Retorna o índice ou chave (string, array ou objetos)
+const frutas = ['Pera', 'Maçã', 'Uva'];
+
+for (let i in frutas){
+    console.log(frutas[i]);
+}
+
+const pessoa = {
+    nome: 'Luiz',
+    sobrenome: 'Otávio',
+    idade: 30,
+};
+
+for (let chaves in pessoa) {
+    console.log(`${chaves}: ${pessoa[chaves]}`);
+}
+
+const nome = ['Luiz', 'Otávio', 'Henrique'];
+
+*/
+
+/* For - of - Estrutura de repetição:
+Retorna o valor em si (iteráveis, arrays ou strings)
+for (let i of nome) {
+    console.log(i);
+}
+
+*/
+
+/* While e Do While - Estrutura de repetição: 
+const nome = 'Luiz';
+
+let i = 0;
+
+while ( i <= nome.length) {
+    console.log(i);
+    i++;
+}
+
+function random(min, max) {
+    const r = Math.random() * (max - min) + min;
+    return Math.floor(r);
+}
+
+const min = 1;
+const max = 50;
+let rand = random(min, max);
+
+while(rand !== 10){
+    rand = random(min, max);
+    console.log(rand);
+}
+
+console.log('----------------------------------------');
+
+do {
+    rand = random(min, max);
+    console.log(rand);
+}while(rand !== 10);
 */
 
