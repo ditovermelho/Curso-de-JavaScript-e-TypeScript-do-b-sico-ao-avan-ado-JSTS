@@ -367,5 +367,244 @@ do {
     rand = random(min, max);
     console.log(rand);
 }while(rand !== 10);
+
+*/
+
+/* Break e Continue:
+const targetNumber  = 7;
+const numbers  = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const skipNumbers  = [2, 5];
+
+for (let number of numbers ) {
+
+    if (skipNumbers.includes(number)) {
+        console.log(`Pulei o número ${number}`);
+        continue;
+    }
+
+
+    console.log(number);
+
+    if (number === targetNumber) {
+        console.log(`O número ${number} foi encontrado encerrando o laço....`);
+        break;
+    }
+
+}
+*/
+
+/* Exercício com lógica de programação - 01
+Ectreva uma função que recebe 2 números e retorne o maior valor
+
+function max(x, y) {
+    if(x > y) return x;
+    return y;
+}
+
+function max(x, y) {
+    return x > y ? x : y;
+}
+
+const max = (x,y) =>{
+    return x > y ? x : y;
+}
+
+const max = (x,y) => x > y ? x : y;
+
+console.log(max(10,2));
+*/
+
+/* Exercício com lógica de programação - 02
+Escreva uma função chamada ePaisagem que recebe dois argumentos, largura e altura de uma imagem (number).
+Retorne true se a imafem estiver no modo paisagem.
+
+function ePaisagem(largura, altura) {
+    return largura > altura;
+}
+
+const ePaisagem = (largura, altura) => largura > altura;
+
+const largura = 800;
+const altura = 600;
+console.log(ePaisagem(largura, altura));
+
+*/
+
+/* Exercício com lógica de programação - 03 FizzBuzz
+O FizzBuzz é um exercício clássico de programação que envolve a exibição de números de 1 a N, 
+mas com algumas regras especiais.
+
+Escreva uma função que percorra os números de 1 a N. Retorne o seguinte:
+
+Checar se o número e realmente um número.
+Se o número for divisível por 3, imprima “Fizz”.
+Se o número for divisível por 5, imprima “Buzz”.
+Se o número for divisível por ambos 3 e 5, imprima “FizzBuzz”.
+Se o número não for divisível por 3 e 5, imprima o próprio número.
+
+function fizzBuzz(N) {
+    if (Number.isInteger(N)) {
+        for (let i = 0; i <= N; i++) {
+            if (i % 3 === 0 && i % 5 === 0) {
+                console.log("FizzBuzz");
+            } else if (i % 3 === 0) {
+                console.log("Fizz");
+            } else if (i % 5 === 0) {
+                console.log("Buzz");
+            } else {
+                console.log(i);
+            }
+        }
+    }else{
+        console.log(N);
+    }
+}
+
+// Exemplo de uso:
+fizzBuzz(15); // Imprime os números de 1 a 15 com as regras do FizzBuzz
+
+função simplificada:
+
+function fizzBuzz(number) {
+    if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
+    if (number % 3 === 0) return "Fizz";
+    if (number % 5 === 0) return "Buzz";
+    return number;
+}
+
+for (let i = 0; i <= 100; i++){
+    console.log(fizzBuzz(i));
+}
+*/
+
+/* Tratando e lançando erros (try, catch, throw, finally):
+Try-Catch:
+    Use try para envolver o código que pode gerar exceções.
+    Use catch para capturar e tratar exceções.
+
+try{
+    console.log(naoExisto);
+} catch(err){
+    console.log('naoExisto não existe.');
+}
+
+try {
+    // Código que pode gerar erro
+} catch (erro) {
+    console.error("Ocorreu um erro:", erro.message);
+}
+
+Throw:
+    Use throw para lançar exceções personalizadas.
+
+function dividir(a, b) {
+    if (b === 0) {
+        throw new Error("Divisão por zero não é permitida.");
+    }
+    return a / b;
+}
+
+function soma(x,y){
+    if (typeof x !== 'number' || typeof y !== 'number'){
+        throw new Error('x e y precisam ser números.');
+    }
+
+    return x + y;
+}
+
+try {
+    console.log(soma(1, 2));
+    console.log(soma('1', 2));
+} catch(error) {
+    // console.log(error);
+    console.log('Alguma coisa mais amigável pro usuário.');
+}
+
+Finally (opcional):
+    Use finally para executar código após o bloco try-catch.
+
+try {
+    // Código
+} catch (erro) {
+    // Tratamento de erro
+} finally {
+    // Código a ser executado sempre
+}
+
+try {
+    // Código
+    console.log(a);
+    console.log('Abri um arquivo.');
+    console.log('Manipule o arquivo e gerou erro');
+    console.log('Fechei o arquivo');
+} catch (erro) {
+    // Tratamento de erro
+    console.log('Tratando o erro');
+} finally {
+    // Código a ser executado sempre
+    console.log('Finally: Eu sempre sou executado');
+}
+
+function retonaHora(data) {
+    if (data && !(data instanceof Date)) {
+        throw new TypeError('Esperando instância de Date.');
+    }
+
+    if (!data) {
+        data = new Date();
+    }
+
+    return data.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+}
+
+try {
+    const data = new Date('01-01-1970 12:58:12');
+    const hora = retonaHora(data);
+    console.log(hora);
+} catch (erro) {
+    // Tratar erro
+} finally {
+    console.log('Tenha um bom dia!');
+}
+
+*/
+
+/* setInterval e setTimeout
+setInterval:
+* O método setInterval executa uma função repetidamente em intervalos regulares.
+* Sintaxe: setInterval(funcao, intervaloEmMilissegundos).
+* Exemplo: setInterval(() => console.log("Executando a cada segundo"), 1000).
+
+setTimeout:
+* O método setTimeout executa uma função após um atraso específico.
+* Sintaxe: setTimeout(funcao, atrasoEmMilissegundos).
+* Exemplo: setTimeout(() => console.log("Executado após 2 segundos"), 2000).
+
+function retonaHora(data) {
+    if (data && !(data instanceof Date)) {
+        throw new TypeError('Esperando instância de Date.');
+    }
+
+    if (!data) {
+        data = new Date();
+    }
+
+    return data.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+}
+
+
+const timer = setInterval(() => console.log(retonaHora()), 1000);
+
+setTimeout(() => clearInterval(timer), 5000);
 */
 
