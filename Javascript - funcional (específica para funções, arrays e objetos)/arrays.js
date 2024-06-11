@@ -78,7 +78,7 @@ const numerosPares = numeros.filter(numero => numero % 2 === 0);
 
 Retorne os números maiores que 10:
 
-const numeros = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27]
+const numeros = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
 
 function callbackFliter (valor) {
     return valor > 10;
@@ -120,7 +120,7 @@ console.log('\nAs pessoas cujo nome termina com a, são: ');
 view(pessoasUltimaLetra);
 */
 
-/* Map - Mapeando o array: 
+/* Map - Mapeando o array:
 O método map() em JavaScript é usado para criar um novo array aplicando uma função a cada elemento do array original.
 Aqui estão os pontos-chave:
 
@@ -134,9 +134,41 @@ const numeros = [1, 2, 3];
 const quadrados = numeros.map(numero => numero ** 2);
 // Resultado: [1, 4, 9]
 
+const numeros = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
+const numerosEmDobro = numeros.map(valor => valor * 2);
+console.log(numerosEmDobro);
+
+Para cada elemento:
+    retorne apenas uma string com o nome da pessoa.
+    remova apenas a chave "nome" do objeto.
+    adicione uma chave id em cada objeto.
+
+const pessoas = [
+    {nome:'Luiz', idade: 62},
+    {nome:'Maria', idade: 23},
+    {nome:'Eduardo', idade: 55},
+    {nome:'Letícia', idade: 19},
+    {nome:'Rosana', idade: 32},
+    {nome:'Wallace', idade: 47}
+];
+
+const nomes = pessoas.map(obj => obj.nome);
+console.log(nomes);
+
+const idades = pessoas.map(obj => ({idade: obj.idade}));
+console.log(idades);
+
+const pessoasIds = pessoas.map((obj, id) => {
+    const newObj = {id: id,...obj};
+    return newObj;
+});
+
+const pessoasIds = pessoas.map((obj, id) => ({id: id,...obj}));
+
+console.log(pessoasIds);
+console.log(pessoas);
+
 */
-
-
 
 /* Reduce - Reduzindo o array:
 O método reduce() em JavaScript é usado para reduzir um array a um único valor, aplicando uma função acumuladora a
@@ -151,5 +183,59 @@ Exemplo:
 const numeros = [1, 2, 3, 4];
 const somaTotal = numeros.reduce((acumulador, numero) => acumulador + numero, 0);
 // Resultado: 10 (1 + 2 + 3 + 4)
+
+const numeros = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
+const total =  numeros.reduce((acumulador, valor) => acumulador += valor, 0);
+
+console.log(total);
+console.log(numeros);
+
+Retorne a pessoa mais velha:
+
+const pessoas = [
+    {nome:'Luiz', idade: 62},
+    {nome:'Maria', idade: 23},
+    {nome:'Eduardo', idade: 55},
+    {nome:'Letícia', idade: 19},
+    {nome:'Rosana', idade: 32},
+    {nome:'Wallace', idade: 47}
+];
+
+const maisVelha = pessoas.reduce((acumulador, valor) => {
+    if(acumulador.idade > valor.idade) return acumulador;
+    return valor;
+});
+console.log(maisVelha);
+*/
+
+/* Filter + Map + Reduce:
+retoner a soma do cobro de totos os pares:
+-> Filtrar pares.
+-> Dobrar os valores.
+-> Somar tudo.
+
+const numeros = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
+const somaTudo = numeros
+.filter(valor => valor % 2 === 0)
+.map(valor => valor * 2)
+.reduce((ac, valor) => ac += valor, 0);
+
+console.log(numeros);
+console.log(somaTudo);
+*/
+
+/* ForEach:
+O método forEach() em JavaScript é usado para iterar sobre os elementos de um array e executar uma função para
+cada elemento. Aqui estão os pontos-chave:
+
+Definição:
+    O forEach() percorre cada elemento do array e aplica uma função a cada um.
+    Ele não cria um novo array, mas é útil para executar uma ação em cada elemento.
+
+Exemplo:
+
+const numeros = [1, 2, 3];
+numeros.forEach(numero => console.log(numero));
+// Resultado: 1, 2, 3 (imprime cada número)
 
 */
