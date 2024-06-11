@@ -365,6 +365,153 @@ function criarPessoa(nome, idade) {
 const pessoa1 = criarPessoa("Ana", 30);
 pessoa1.saudacao(); // "Olá, meu nome é Ana e tenho 30 anos."
 
+function criarPessoa(nome, sobrenome, altura, peso) {
+    return {
+        nome,
+        sobrenome,
+        // Getter
+        get nomeCompleto(){
+            return `${this.nome} ${this.sobrenome}`;
+        },
+
+        // Setter
+        set nomeCompleto(valor){
+            valor = valor.split(' ');
+            this.nome = valor.shift();
+            this.sobrenome = valor.join(' ');
+        },
+
+        fala(assunto = 'Nada') {
+            return `${nome} está falando sobre ${assunto}.`;
+        },
+
+        altura,
+        peso,
+
+        // Getter
+        get imc(){
+            const imc = this.peso / (this.altura **2);
+            return imc.toFixed(2);
+        }
+    };
+}
+
+const p1 = criarPessoa('Luiz', 'Otávio', 1.8, 80);
+const p2 = criarPessoa('Maria', 'Otávio', 1.6, 42);
+console.log(p1.fala('JS'));
+console.log(p1.imc);
+console.log(p2.nomeCompleto);
+p2.nomeCompleto = 'Maria Oliveira Silva';
+console.log(p2.nome);
+console.log(p2.sobrenome);
+
 */
 
+/* Funções construtoras (constructor functions):
+Funções construtoras (constructor functions) em JavaScript são funções que atuam como modelos para criar objetos.
+Aqui estão os pontos-chave:
+
+Definição:
+    Uma função construtora é chamada com new para criar instâncias de objetos.
+    Elas geralmente têm propriedades e métodos definidos no this.
+
+Exemplo Simples:
+
+function Pessoa(nome, sobrenome) {
+    // Atributo ou método privados
+    const id = 1;
+    const metodoInterno = function(){};
+
+    // Atributo ou método prúblicos
+    this.nome = nome;
+    this.sobrenome = sobrenome;
+    this.apresentar = function () {
+        console.log(`Olá, meu nome é ${this.nome} ${this.sobrenome}.`);
+    };
+}
+
+const pessoa1 = new Pessoa("Ana", 30);
+pessoa1.apresentar(); // "Olá, meu nome é Ana e tenho 30 anos."
+
+*/
+
+/* Funções recursivas:
+Funções recursivas em JavaScript são aquelas que chamam a si mesmas durante a execução.
+Aqui estão os pontos-chave:
+
+Definição:
+    Uma função recursiva resolve um problema dividindo-o em subproblemas menores e resolvendo-os de forma semelhante.
+    Ela deve ter uma condição de parada (caso base) para evitar recursão infinita.
+
+Exemplo Simples (Fatorial):
+
+function fatorial(n) {
+    if (n === 0) {
+        return 1; // Caso base
+    }
+    return n * fatorial(n - 1); // Chamada recursiva
+}
+
+console.log(fatorial(5)); // 120
+
+function recursiva(max){
+    if (max >= 10) return;
+    max++;
+    console.log(max);
+    recursiva(max);
+}
+
+recursiva(-10);
+
+*/
+
+/* Funções geradoras:
+Funções geradoras em JavaScript são funções especiais que permitem a criação de iteradores personalizados.
+Aqui estão os pontos-chave:
+
+Definição:
+    Uma função geradora é declarada com function* e contém a palavra-chave yield.
+    Ela pausa a execução e retém seu estado, permitindo iterações controladas.
+
+Exemplo Simples (Contagem):
+
+function* contador() {
+    let i = 0;
+    while (true) {
+        yield i++;
+    }
+}
+
+const iterador = contador();
+console.log(iterador.next().value); // 0
+console.log(iterador.next().value); // 1
+
+function* geradora1(){
+    // Código qualquer ....
+    yield 'Valor 1';
+    // Código qualquer ....
+    yield 'Valor 2';
+    // Código qualquer ....
+    yield 'Valor 3';
+}
+
+const g1 = geradora1();
+for (let valor of g1){
+    console.log(valor);
+}
+
+function* geradora2() {
+    // Código qualquer ....
+    yield function () { console.log('Vim do y1') };
+
+    // Código qualquer ....
+    yield function () { console.log('Vim do y2') };
+}
+
+const g2 = geradora2();
+const func1 = g2.next().value;
+const func2 = g2.next().value;
+func1();
+func2();
+*/
 
