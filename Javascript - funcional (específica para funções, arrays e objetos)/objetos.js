@@ -326,4 +326,302 @@ console.log(caneca);
 
 */
 
+/* Polimorfismo:
+O polimorfismo é um conceito da programação orientada a objetos que permite que diferentes objetos 
+possam ser tratados de forma intercambiável, usando a mesma interface. Em JavaScript, isso é 
+frequentemente alcançado através de herança e interfaces comuns.
+
+Existem dois tipos principais de polimorfismo:
+1. Polimorfismo de Sobrecarga (Overloading): Não é diretamente suportado em JavaScript, mas pode 
+ser simulado através de diferentes implementações de funções, verificando o número e tipo de argumentos.
+2. Polimorfismo de Substituição (Overriding): Acontece quando uma classe derivada implementa um método 
+que substitui um método da classe base. Isto permite que um método da classe base seja chamado através 
+de uma referência à classe base, mas a implementação da classe derivada é usada.
+
+Exemplos:
+
+// Exemplo de Polimorfismo de Substituição (Overriding)
+class Animal {
+    speak() {
+        console.log('Animal sound');
+    }
+}
+
+class Dog extends Animal {
+    speak() {
+        console.log('Woof!');
+    }
+}
+
+class Cat extends Animal {
+    speak() {
+        console.log('Meow!');
+    }
+}
+
+const animals = [new Animal(), new Dog(), new Cat()];
+animals.forEach(animal => animal.speak());
+// Output:
+// Animal sound
+// Woof!
+// Meow!
+
+Neste exemplo, cada classe derivada (Dog e Cat) implementa sua própria versão do método `speak`. 
+Ao iterar sobre um array de objetos do tipo `Animal`, cada objeto chama sua própria versão do método 
+`speak`, demonstrando polimorfismo.
+
+
+Exemplo conta:
+
+function Conta(agencia, conta, saldo) {
+    this.agencia = agencia;
+    this.conta = conta;
+    this.saldo = saldo;
+}
+
+Conta.prototype.sacar = function (valor) {
+    if (this.saldo < valor) {
+        return console.log('Saldo insuficiente!'), this.verSaldo();
+    }
+
+    this.saldo -= valor;
+    return console.log('Operação realizada com sucesso!'), this.verSaldo();
+};
+
+Conta.prototype.depositar = function (valor) {
+    if (typeof valor !== 'number' || valor <= 0) return console.log('Valor invalido!');
+    this.saldo += valor;
+    return console.log('Operação realizada com sucesso!'), this.verSaldo();
+
+};
+
+Conta.prototype.verSaldo = function () {
+    return console.log(`Saldo disponivel em conta é de R$ ${this.saldo}.`);
+};
+
+function ContaCorrente(agencia, conta, saldo, limite) {
+    Conta.call(this, agencia, conta, saldo);
+    this.limite = limite;
+}
+
+ContaCorrente.prototype = Object.create(Conta.prototype);
+ContaCorrente.prototype.constructor = ContaCorrente;
+
+ContaCorrente.prototype.sacar = function (valor) {
+    if ((this.saldo + this.limite) < valor) {
+        return console.log('Saldo insuficiente!'), this.verSaldo();
+    } else if (this.saldo < valor) {
+        valor -= this.saldo;
+        this.saldo = 0;
+        this.limite -= valor;
+        return console.log('Operação realizada com sucesso!'), this.verSaldo();
+    }
+
+    this.saldo -= valor;
+    return console.log('Operação realizada com sucesso!'), this.verSaldo();
+};
+
+ContaCorrente.prototype.verSaldo = function () {
+    return console.log(`Saldo disponivel é de R$ ${this.saldo}.\nLimite disponivel é de R$ ${this.limite}`);
+};
+
+function ContaPoupanca(agencia, conta, saldo) {
+    Conta.call(this, agencia, conta, saldo);
+}
+
+ContaPoupanca.prototype = Object.create(Conta.prototype);
+ContaPoupanca.prototype.constructor = ContaPoupanca;
+
+const conta1 = new ContaCorrente('BB', '2022', 10, 1000);
+conta1.depositar(11);
+conta1.depositar(10);
+conta1.sacar(331);
+console.log('---------------------------------------------');
+const conta2 = new ContaPoupanca('Caixa', '2222', 100, 1000);
+conta2.depositar(11);
+conta2.depositar(10);
+conta2.sacar(331);
+*/
+
+/* Factory Functions + Prototypes
+function criaPessoa(nome, sobrenome) {
+    const pessoaPrototype = {
+        falar() {
+            console.log(`${this.nome} está falando.`)
+        },
+    
+        comer() {
+            console.log(`${this.nome} está comendo.`)
+        },
+    
+        beber() {
+            console.log(`${this.nome} está bebendo.`)
+        },
+    }
+
+    return Object.create(pessoaPrototype, {
+        nome: {value: nome},
+        sobrenome: {value: sobrenome},
+    });
+}
+
+const pessoaPrototype = {
+    falar() {
+        console.log(`${this.nome} está falando.`)
+    },
+
+    comer() {
+        console.log(`${this.nome} está comendo.`)
+    },
+
+    beber() {
+        console.log(`${this.nome} está bebendo.`)
+    },
+}
+
+function criaPessoa(nome, sobrenome) {
+    return Object.create(pessoaPrototype, {
+        nome: {value: nome},
+        sobrenome: {value: sobrenome},
+    });
+}
+
+const falar = {
+    falar() {
+        console.log(`${this.nome} está falando.`)
+    },
+};
+const comer = {
+    comer() {
+        console.log(`${this.nome} está comendo.`)
+    },
+};
+const beber = {
+    beber() {
+        console.log(`${this.nome} está bebendo.`)
+    },
+};
+
+//const pessoaPrototype = {...falar, ...beber, ...comer};
+const pessoaPrototype = Object.assign({}, falar, beber, comer);
+
+function criaPessoa(nome, sobrenome) {
+    return Object.create(pessoaPrototype, {
+        nome: {value: nome},
+        sobrenome: {value: sobrenome},
+    });
+}
+
+const pessoa1 = criaPessoa("Luiz", 'Otavio');
+const pessoa2 = criaPessoa('Maria', 'Carolina');
+
+console.log(pessoa1);
+pessoa1.falar();
+pessoa1.beber();
+pessoa1.comer();
+console.log(pessoa2);
+pessoa2.falar();
+pessoa2.beber();
+pessoa2.comer();
+
+*/
+
+/* Objeto Map()
+O objeto `Map` em JavaScript é uma coleção de pares chave-valor, onde qualquer valor (objetos e 
+valores primitivos) pode ser usado como chave ou valor. `Map` mantém a ordem de inserção dos elementos, 
+o que significa que a iteração sobre um `Map` retornará os elementos na ordem em que foram adicionados.
+
+O `Map` é especialmente útil quando se precisa de uma coleção ordenada de pares chave-valor com 
+chaves de qualquer tipo, incluindo objetos.
+
+
+Principais características e métodos de `Map`:
+
+1. Criação:
+    const map = new Map();
+
+2. Adicionar elementos:
+    map.set(key, value);
+    - Adiciona um par chave-valor ao `Map`.
+
+3. Acessar elementos:
+    map.get(key);
+    - Retorna o valor associado à chave especificada.
+
+4. Verificar existência:
+    map.has(key);
+    - Retorna `true` se a chave especificada existir no `Map`, caso contrário, retorna `false`.
+
+5. Remover elementos:
+    map.delete(key);
+    - Remove o par chave-valor associado à chave especificada.
+
+6. Tamanho:
+    map.size;
+    - Retorna o número de pares chave-valor no `Map`.
+
+7. Limpar todos os elementos:
+    map.clear();
+    - Remove todos os pares chave-valor do `Map`.
+
+8. Iteração:
+    - map.keys(): Retorna um iterador sobre as chaves.
+    - map.values(): Retorna um iterador sobre os valores.
+    - map.entries(): Retorna um iterador sobre os pares chave-valor [key, value].
+    - map.forEach((value, key) => { ... }): Itera sobre cada par chave-valor no `Map`.
+
+Exemplo:
+const map = new Map();
+map.set('name', 'John');
+map.set('age', 30);
+
+console.log(map.get('name')); // Output: John
+console.log(map.has('age'));  // Output: true
+
+map.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+});
+// Output:
+// name: John
+// age: 30
+
+const pessoas = [
+    {id: 3, nome: 'Luiz'},
+    {id: 2, nome: 'Maria'},
+    {id: 1, nome: 'Helena'},
+];
+
+const novasPessoas = {};
+
+for (const{id, nome} of pessoas){
+    novasPessoas[id] = {id, nome};
+}
+
+for (const pessoa of pessoas){
+    const {id} = pessoa;
+    novasPessoas[id] = {...pessoa};
+}
+
+console.log(novasPessoas);
+
+const pessoas = [
+    {id: 3, nome: 'Luiz'},
+    {id: 2, nome: 'Maria'},
+    {id: 1, nome: 'Helena'},
+];
+
+const novasPessoas = new Map();
+
+for (const pessoa of pessoas){
+    const {id} = pessoa;
+    novasPessoas.set(id, {...pessoa});
+}
+
+console.log(novasPessoas.get(2));
+
+for (const [identifier, {id, nome}] of novasPessoas){
+    console.log(identifier, id, nome);
+}
+
+*/
 
