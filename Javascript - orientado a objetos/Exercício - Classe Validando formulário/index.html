@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício - Classe Validando formulário</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <section class="container">
+        <h1>Formulário de Cadastro</h1>
+        <ul>
+            <li>Nenhum campo pode estar vazio.</li>
+            <li>Usuário só podera conter letras e/ou números.</li>
+            <li>Usuário deverá ter entre 3 e 12 caracteres.</li>
+            <li>Senha precissa ter entre 6 e 12 caracteres.</li>
+        </ul>
+
+        <form action="/" method="post" class="registration-form">
+            <label>Nome:</label>
+            <input type="text"  class="name valid">
+            <label>Sobrenome:</label>
+            <input type="text"  class="last-name valid">
+            <label>CPF:</label>
+            <input type="text"  class="cpf valid">
+            <label>Usuário</label>
+            <input type="email"  class="user valid">
+            <label>Senha:</label>
+            <input type="password"  class="user-password valid">
+            <label>Repetir senha:</label>
+            <input type="password"  class="repit-password valid">
+            <button>Enviar</button>
+        </form>
+    </section>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
