@@ -128,4 +128,4 @@ h1.innerHTML = formatDate(data);
 // Fomar 3 - apenas com a função:
 const h1 = document.querySelector('.container h1');
 const data = new Date()
-h1.innerHTML = data.toLocaleDateString('pt-br', {dateStyle: 'full', timeStyle: 'short'});
+h1.innerHTML = data.toLocaleDateString('pt-br', {dateStyle: 'full'});
