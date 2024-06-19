@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.js","mappings":";;;;;AAAA;AACA;AACA,E","sources":["webpack://modelo/./src/index.js"],"sourcesContent":["/* \r\n\"babel\": \" babel ./index.js -o ./bundle.js --presets=@babel/env -w\"\r\n*/\r\n"],"names":[],"sourceRoot":""}

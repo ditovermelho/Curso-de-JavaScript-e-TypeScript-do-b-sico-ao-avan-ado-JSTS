@@ -144,6 +144,26 @@ executa();
 /* Fetch API (GET):
 * Fetch API fornece uma maneira mais poderosa e flexível de fazer requisições de rede, comparado ao XMLHttpRequest.
 * Utiliza Promises, tornando o código mais limpo e fácil de ler e escrever quando se faz requisições GET.
-* Exemplo: fetch('url').then(response => response.json()).then(data => console.log(data));
+- Exemplo: 
+fetch('https://api.example.com/posts')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+*/
+
+/* Axios:
+O Axios é uma biblioteca externa para fazer requisições HTTP.
+
+- Vantagens:
+Suporte a Promises.
+Recursos adicionais (como timeout e interceptors).
+Configurações globais.
+
+-Limitações:
+Requer uma dependência adicional.
+
+- Exemplo:
+axios.get('https://api.example.com/posts')
+  .then(response => console.log(response.data));
 
 */
