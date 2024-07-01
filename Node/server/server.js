@@ -1,21 +1,18 @@
 const express = require('express');
 const app = express();
+const routes = require('./routes');
+const path = require('path');
+const {middlewareGlobal} = require('./src/middlewares/middlewares');
 
-app.get('/', (req, res) => {
-    res.send(`
-    <form action="/" method ="POST">
-        Nome: <input type="text" name="nome">
-        <button>Enviar</button>
-    </form>`);
-})
+app.use(express.urlencoded({extended: true}));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.post('/', (req, res) => {
-    res.send('Recebi o formulário');
-});
+app.set('views', path.resolve(__dirname, 'src', 'views'));
+app.set('view engine', 'ejs');
 
-app.get('/contato', (req, res) => {
-    res.send('Obrigado por entrar em contato com a gente.');
-});
+// Nossos próprios Middlewares
+app.use(middlewareGlobal);
+app.use(routes);
 
 app.listen(3000, () => {
     console.log('Acessar http://localhost:3000');
