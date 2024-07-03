@@ -404,6 +404,101 @@ Exemplo de Uso:
 
 */
 
-/* 
+/* MongoDB - Conexão e primeiro Model:
+Por que precisamos do Mongoose?
+  O MongoDB é um banco de dados NoSQL popular, mas sua flexibilidade pode ser complexa para iniciantes.
+  O Mongoose é uma abstração sobre o driver nativo do MongoDB, simplificando a interação com o banco de dados.
+  Ele ajuda a impor regras de esquema e integra o código do Node.js com chamadas de banco de dados.
+
+Conexão com o MongoDB usando o Mongoose:
+  Instale o pacote Mongoose via npm:
+    npm install mongoose
+
+  No seu código, conecte-se ao MongoDB:
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/seu-banco-de-dados', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
+
+  Criando um Modelo (Schema) com o Mongoose:
+    Um modelo define a estrutura dos documentos no banco de dados.
+
+Exemplo:
+
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  age: { type: Number }
+});
+
+const User = mongoose.model('User', userSchema);
+
+  Usando o Modelo:
+    Crie, leia, atualize ou exclua documentos usando o modelo User.
+
+Exemplo:
+const newUser = new User({
+  name: 'Alice',
+  email: 'alice@example.com',
+  age: 30
+});
+
+newUser.save(); // Salva o documento no banco de dados
 
 */
+
+/* Express Session e Flash Messages:
+Express Session:
+  O Express Session é um middleware que gerencia sessões de usuário em aplicativos Express.js.
+  Ele cria e mantém uma sessão para cada cliente, armazenando dados temporários no servidor.
+
+Exemplo de configuração:
+
+const express = require('express');
+const session = require('express-session');
+const app = express();
+
+app.use(session({
+  secret: 'my-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+Flash Messages:
+  As Flash Messages são mensagens temporárias exibidas ao usuário após uma ação (como login, registro ou redirecionamento).
+  Elas são úteis para fornecer feedback imediato.
+
+Exemplo de uso com o módulo connect-flash:
+
+const express = require('express');
+const session = require('express-session');
+const flash = require('connect-flash');
+const app = express();
+
+app.use(session({ secret: 'my-secret-key' }));
+app.use(flash());
+
+// Exemplo de uso em uma rota:
+app.get('/signup', (req, res) => {
+  req.flash('signupMessage', 'Email já cadastrado.');
+  res.redirect('/signup');
+});
+
+Exibindo Mensagens nas Visualizações:
+  No arquivo de rota, defina mensagens flash usando req.flash('chave', 'mensagem').
+  Nas visualizações (como Jade, EJS ou Handlebars), exiba as mensagens:
+
+<!-- Exemplo em EJS -->
+<% if (success_messages.length > 0) { %>
+  <div class="alert alert-success"><%= success_messages[0] %></div>
+<% } %>
+
+*/
+
+/* */
