@@ -1,23 +1,8 @@
-/* 
-req.session.usuario = { nome: 'Luiz', logado: true};
-console.log('');
-console.log('req.session.usuario');
-console.log('');
-req.flash('info', 'Olá mundo!');
-req.flash('error', 'Error');
-req.flash('success', 'Sucesso!');
-console.log('');
-console.log(req.flash('info'));
-console.log('');
-console.log('');
-console.log(req.flash('error'));
-console.log('');
-console.log('');
-console.log(req.flash('success'));
-console.log('');
-*/
 exports.paginaInicial = (req, res) => {
-    res.render('index');
+    res.render('index', {
+        titulo: 'Este será o <samp style="color: red;">título</samp> da página',
+        numeros: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    });
     return;
 }
 

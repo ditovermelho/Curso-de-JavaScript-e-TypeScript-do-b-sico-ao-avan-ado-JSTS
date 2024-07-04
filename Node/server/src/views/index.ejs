@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<%- include("includes/head") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server</title>
-</head>
-
-<body>
     <section class="container">
-        <h1>Lorem ipsum dolor sit amet</h1>
+        <h1><%= umaVariavelLocal %></h1>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Repellendus nisi explicabo saepe voluptatibus consequuntur et corporis
@@ -18,12 +10,11 @@
         </p>
 
         <form action="/" method="post">
+            <input type="hidden", name="_csrf" value="<%= csrfToken %>">
             <label>Cliente</label>
             <input type="text" name="cliente">
             <button>Enviar</button>
         </form>
     </section>
-    <script src="./assets/js/bundle.js"></script>
-</body>
 
-</html>
+<%- include("includes/footer") %>

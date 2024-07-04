@@ -501,4 +501,62 @@ Exibindo Mensagens nas Visualizações:
 
 */
 
-/* */
+/* Injetando conteúdo nos views:
+Injeção de Conteúdo:
+  A injeção de conteúdo refere-se à adição dinâmica de informações em uma página web.
+  Isso pode ser feito usando JavaScript para manipular o DOM (Document Object Model) e inserir, modificar ou remover
+  elementos HTML.
+
+Exemplos comuns de injeção de conteúdo:
+  Inserção de Texto: Adicionar texto a um elemento existente (por exemplo, um parágrafo).
+  Alteração de Estilos: Modificar estilos CSS de elementos (por exemplo, mudar a cor de um botão).
+  enderização de Dados Dinâmicos: Exibir dados do servidor (como informações de usuário) em uma página.
+
+Como Fazer:
+Use métodos como innerHTML, textContent ou appendChild para manipular o conteúdo de elementos HTML.
+Evite vulnerabilidades, como Cross-Site Scripting (XSS), garantindo que os dados inseridos sejam seguros e escapados
+corretamente.
+
+Exemplo:
+<!-- HTML -->
+<div id="myDiv"></div>
+
+<!-- JavaScript -->
+<script>
+  const myDiv = document.getElementById('myDiv');
+  myDiv.innerHTML = 'Conteúdo inserido dinamicamente!';
+</script>
+
+*/
+
+/* Helmet e CSRF:
+Helmet:
+  O Helmet.js é uma biblioteca JavaScript de código aberto que ajuda a melhorar a segurança de aplicativos Node.js.
+  Ele atua como um middleware para o Express e outras tecnologias semelhantes, adicionando ou removendo cabeçalhos HTTP
+  para cumprir os padrões de segurança da web.
+  O Helmet protege contra vulnerabilidades conhecidas, como ataques de Cross-Site Scripting (XSS) e clickjacking.
+  É especialmente útil porque as aplicações Express não possuem cabeçalhos de segurança HTTP por padrão.
+
+Helmet no localhost (EVITE):
+  O Helmet é para segurança da aplicação, portanto, caso você esteja com um sistema ainda em desenvolvimento, usando urls
+como "127.0.0.1", "localhost" ou até um servidor com IP externo, sem usar SSL (https), é recomendável desativá-lo. Ele
+pode bloquear importação de scripts e arquivos de CSS.
+
+  Caso ocorra erros ao importar o bundle.js, arquivos de CDN (como bootstrap, por exemplo) ou CSS, basta desativar o
+helmet para correção.
+
+  Isso só ocorrerá em sistemas sem SSL (sem https na URL).
+
+CSRF (Cross-Site Request Forgery):
+  O CSRF é um tipo de ataque em que um invasor engana um usuário autenticado para executar ações indesejadas em um 
+  aplicativo.
+  Para proteger contra CSRF, você pode usar tokens CSRF (geralmente chamados de “tokens de sincronização”) em
+  formulários e requisições.
+  O token é gerado no servidor e incluído no formulário ou cabeçalho da requisição. O servidor verifica se o token
+  corresponde ao esperado antes de processar a ação.
+
+Integração:
+  Use o Helmet para configurar cabeçalhos de segurança, como o Content-Security-Policy, Strict-Transport-Security,
+  X-Content-Type-Options, etc.
+  Implemente tokens CSRF para proteger contra ataques CSRF.
+*/

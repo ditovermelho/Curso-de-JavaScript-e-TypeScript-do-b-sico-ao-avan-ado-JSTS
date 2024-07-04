@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.CONNECTIONSTRING)
     .then(() => {
-        console.log("Conectei á base de dados.");
         app.emit("pronto");
     })
     .catch( e => console.log(e));
@@ -14,17 +13,17 @@ mongoose.connect(process.env.CONNECTIONSTRING)
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
-
 const routes = require('./routes');
 const path = require('path');
-const { middlewareGlobal } = require('./src/middlewares/middlewares');
+const helmet = require('helmet');
+const csrf = require('csurf');
+const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middlewares');
 
+app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-//IQSN5XIPF6WgfUP+D2cjKsgO fVit Vlvt vItf Flvt iqs5PiX c8()
-//new MongoStore({mongooseConnection: mongoose.connection})
-//MongoStore.create({ mongoUrl: process.env.MONGO_CONNECTION_URL })
 const sessionOptions = session({
     secret: 'akasdfj0ú23453456+54qt23qv qwf qwer qwer qwer asdasdasda a6()',
     store: MongoStore.create({ 
@@ -44,8 +43,12 @@ app.use(flash());
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
+app.use(csrf());
+
 // Nossos próprios Middlewares
 app.use(middlewareGlobal);
+app.use(checkCsrfError);
+app.use(csrfMiddleware);
 app.use(routes);
 
 app.on("pronto", () => {
