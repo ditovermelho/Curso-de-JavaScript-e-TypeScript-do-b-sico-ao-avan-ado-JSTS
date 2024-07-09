@@ -1,0 +1,43 @@
+<%- include("includes/head") %>
+<%- include("includes/nav") %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-3">
+            <h1 class=" text-center">Contatos</h1>
+            <p class="text-center lead">Cire ou edite seus contatos abaixo.</p>
+
+            <%- include("includes/messages") %>
+
+            <div class="row">
+              <div class="col-lg">
+                <% if(contato._id) { %>
+                  <form action="/contato/edit/<%= contato._id %>" method="post">
+                <% } else { %>
+                  <form action="/contato/register" method="post">
+                <% } %>
+                      <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+                      <div class="mb-3">
+                        <label for="registerInputName" class="form-label">Nome</label>
+                        <input value="<%= contato.name %>" type="text" class="form-control" name="registerInputName" aria-describedby="nameHelp">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registerInputEmail" class="form-label">Email</label>
+                        <input value="<%= contato.email %>" type="email" class="form-control" name="registerInputEmail" aria-describedby="emailHelp">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registerInputPhoneNumber" class="form-label">Telefone</label>
+                        <input value="<%= contato.phoneNumber %>" type="text" class="form-control" name="registerInputPhoneNumber" aria-describedby="phoneNumberHelp">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+              </div>
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+
+<%- include("includes/footer") %>
