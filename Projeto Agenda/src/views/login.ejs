@@ -12,10 +12,10 @@
             <%- include("includes/messages") %>
 
             <div class="row">
-                <div class="col-lg">
+                <div class="col-lg my-5">
                     <h4>Crie sua conta</h4>
                     <p>Se você ainda não possui uma conta, preencha o formulário abaixo:</p>
-                    <form action="/login/register" method="post">
+                    <form class="form-register" action="/login/register" method="post">
                         <input type="hidden" name="_csrf" value=<%= csrfToken %>>
                         <div class="mb-3">
                           <label for="registerInputEmail" class="form-label">Seu e-mail</label>
@@ -25,6 +25,12 @@
                         <div class="mb-3">
                           <label for="registerInputPassword1" class="form-label">Senha</label>
                           <input type="password" class="form-control" name="registerInputPassword1">
+                          <div name="passwordHelp1" class="form-text">Nunca compartilhe sua senha com ninguém.</div>
+                        </div>
+                        <div class="mb-3">
+                          <label for="registerInputPassword2" class="form-label">Confime sua senha</label>
+                          <input type="password" class="form-control" name="registerInputPassword2">
+                          <div name="passwordHelp2" class="form-text">Nunca compartilhe sua senha com ninguém.</div>
                         </div>
                         <div class="mb-3 form-check">
                           <input type="checkbox" class="form-check-input" name="registerCheck">
@@ -34,10 +40,10 @@
                       </form>
                 </div>
 
-                <div class="col-lg">
+                <div class="col-lg my-5">
                     <h4>Faça login</h4>
                     <p>Se você já possui uma conta, faça login abaixo:</p>
-                    <form action="/login/login" method="post">
+                    <form class="form-login" action="/login/login" method="post">
                         <input type="hidden" name="_csrf" value=<%= csrfToken %>>
                         <div class="mb-3">
                           <label for="loginInputEmail" class="form-label">Seu e-mail</label>
@@ -47,6 +53,7 @@
                         <div class="mb-3">
                           <label for="loginInputPassword" class="form-label">Senha</label>
                           <input type="password" class="form-control" name="loginInputPassword">
+                          <div name="passwordHelp" class="form-text">Nunca compartilhe sua senha com ninguém.</div>
                         </div>
                         <div class="mb-3 form-check">
                           <input type="checkbox" class="form-check-input" name="loginCheck">

@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs');
 
 const loginSchema = new mongoose.Schema({
     email: { type: String, required: true },
-    passwoed: { type: String, required: true },
+    password: { type: String, required: true },
 });
 
 const loginModel = mongoose.model('login', loginSchema);
@@ -27,7 +27,7 @@ class Login {
             return;
         }
 
-        if(!bcryptjs.compareSync(this.body.passwoed, this.user.passwoed)){
+        if(!bcryptjs.compareSync(this.body.password, this.user.password)){
             this.errors.push('Senha inválida.');
             this.user = null;
             return;
@@ -43,7 +43,7 @@ class Login {
         if (this.errors.length > 0) return;
 
         const salt = bcryptjs.genSaltSync();
-        this.body.passwoed = bcryptjs.hashSync(this.body.passwoed, salt);
+        this.body.password = bcryptjs.hashSync(this.body.password, salt);
 
         this.user = await loginModel.create(this.body);
 
@@ -62,7 +62,7 @@ class Login {
         if (!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido!');
 
         // A senha precisa ter entre 3 e 50
-        if (this.body.passwoed.length < 3 || this.body.passwoed.length > 50) {
+        if (this.body.password.length < 3 || this.body.password.length > 50) {
             this.errors.push('A senha precisa ter entre 3 e 50 caracteres.');
         }
     }
@@ -76,7 +76,7 @@ class Login {
 
         this.body = {
             email: this.body.registerInputEmail || this.body.loginInputEmail,
-            passwoed: this.body.registerInputPassword1 || this.body.loginInputPassword
+            password: this.body.registerInputPassword1 || this.body.loginInputPassword
         }
     }
 }
