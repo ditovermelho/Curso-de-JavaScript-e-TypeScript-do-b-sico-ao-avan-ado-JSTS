@@ -1,0 +1,32 @@
+# Fazer na maquina virtual/remote:
+sudo apt install ssh git net-tools
+
+# Comandos com resultado parecido
+ip address show // ifconfig
+
+# Altereando configurações do ssh-server, busque por PasswordA e mude para no
+sudo nano /etc/ssh/sshd_config
+sudo systemctl restart ssh
+
+nano ~/.ssh/authorized_keys
+
+
+# Fazer no git bash:
+ssh-keygen
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_rsa (privada)
+# Copiar a chave gerada e colar no authorized_keys do remote
+cat ~/.ssh/id_rsa.pub
+ssh USUARIO@IPDOSERVER
+
+# Tente acessar a porta conectada no navegador 
+# Instale no git bash enquanto estiver conectado no remote e a pagina vai sofre uma alteração
+sudo apt install nginx
+
+# nginx configurações
+sudo systemctl status nginx
+sudo nano /etc/nginx/sites-enabled/yourDomain
+cd /etc/nginx/sites-enabled/
+sudo rm default
+sudo nginx -t
+sudo systemctl restart nginx
