@@ -1,22 +1,33 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
-const initialState = {
-  botaoClicado: false,
-};
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "BOTAO_CLICADO":
-      const newState = { ...state };
-      newState.botaoClicado = !newState.botaoClicado;
-      return newState;
-    default:
-      return state;
-  };
-}
+import rootReducer from "./modules/rootReducer";
+import rootSaga from "./modules/rootSaga";
+import persistedReducers from "./modules/reduxPersist";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: reducer
+  reducer: persistedReducers(rootReducer),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(sagaMiddleware)
 });
 
+sagaMiddleware.run(rootSaga);
+
+export const persistor = persistStore(store);
 export default store;
