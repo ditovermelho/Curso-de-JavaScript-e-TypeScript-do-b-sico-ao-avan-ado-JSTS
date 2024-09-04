@@ -27,16 +27,61 @@ function* loginRequest({ payload }) {
   }
 }
 
-function persistRehydrate({payload}){
+function persistRehydrate({ payload }) {
   const token = get(payload, 'auth.token', '');
 
-  if(!token) return;
+  if (!token) return;
 
   axios.defaults.headers.Authorization = `Bearer ${token}`;
+}
+
+function* registerRequest({ payload }) {
+  const { nome, email, password, id } = payload;
+
+  try {
+    if (id) {
+      yield call(axios.put, "/users", {
+        nome,
+        password: password || undefined,
+        email
+      })
+      toast.success('Cadastro atualizado com sucesso!');
+      yield put(actions.registerUpdatedSuccess({ nome, email, password }));
+    } else {
+      if (id) {
+        yield call(axios.post, "/users", {
+          nome,
+          password,
+          email
+        })
+        toast.success('Cadastro realizado com sucesso!');
+        yield put(actions.registerSuccess());
+        history.push('/login');
+      }
+    }
+
+  } catch (err) {
+    const errors = get(err, 'response.data.errors', []);
+    const status = get(err, 'response.status', 0);
+
+    if(status === 401){
+      toast.error("Você precisa fazer login novamente.");
+      yield put(actions.loginFailure());
+      return history.push('/login');
+    }
+
+    if (errors.length > 0) {
+      errors.map(error => toast.error(error));
+    } else {
+      toast.error("Erro desconhecido");
+    }
+    yield put(actions.registerFailure());
+  }
 }
 
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRehydrate),
+  takeLatest(types.REGISTER_REQUEST, registerRequest),
 ]);
 
