@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container } from "./styled";
+import { Container, Loader } from "./styled";
 
 export default function Loading({ isLoading }) {
   if (!isLoading) return <></>;
 
   return (
     < Container >
-      <div />
-      <span>Carregando...</span>
+      <div>
+        <Loader />
+        <span>Loading...</span>
+      </div>
     </ Container >
   );
 }
