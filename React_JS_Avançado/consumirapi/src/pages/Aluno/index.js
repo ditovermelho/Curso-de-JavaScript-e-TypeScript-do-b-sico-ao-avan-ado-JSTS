@@ -4,15 +4,14 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { isEmail, isFloat, isInt } from "validator";
 import { useDispatch } from "react-redux";
-import { FaUserCircle, FaEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 import { Container } from "../../styles/GlobalStyles.js";
-import { Form, ProfilePicture, Title } from "./styled.js";
+import { Form, Title } from "./styled.js";
 import Loading from "../../components/Loading/index.js";
 import axios from "../../services/axios";
 import history from "../../services/history.js";
 import * as actions from "../../store/modules/auth/actions.js";
+import Fotos from "../Fotos/index.js";
 
 export default function Aluno({ match }) {
   const dispatch = useDispatch();
@@ -23,7 +22,6 @@ export default function Aluno({ match }) {
   const [idade, setIdade] = useState('');
   const [altura, setAltura] = useState('');
   const [peso, setPeso] = useState('');
-  const [foto, setFoto] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -34,9 +32,6 @@ export default function Aluno({ match }) {
         setIsLoading(true);
 
         const { data } = await axios.get(`/alunos/${id}`);
-        const Foto = get(data, "Fotos[0].url", "");
-
-        setFoto(Foto);
 
         setNome(data.nome);
         setSobrenome(data.sobrenome);
@@ -47,8 +42,8 @@ export default function Aluno({ match }) {
 
         setIsLoading(false);
       } catch (err) {
-        const status = get(err => 'response.status', 0);
-        const errors = get(err => "response.data.errors", []);
+        const status = get(err, 'response.status', 0);
+        const errors = get(err, "response.data.errors", []);
 
         if (status === 400) errors.map(error => toast.error(error));
 
@@ -106,7 +101,7 @@ export default function Aluno({ match }) {
           email,
           idade,
           peso,
-          altura
+          altura,
         });
         toast.success('Aluno(a) editado(a) com sucesso!)');
       } else {
@@ -116,7 +111,7 @@ export default function Aluno({ match }) {
           email,
           idade,
           peso,
-          altura
+          altura,
         });
         toast.success('Aluno(a) criado(a) com sucesso!)');
         history.push(`/aluno/${data.id}/edit`);
@@ -137,23 +132,15 @@ export default function Aluno({ match }) {
     }
   };
 
+
+
+
   return (
     <Container>
       <Loading isLoading={isLoading} />
       <Title>{id ? "Editar Aluno" : "Novo Aluno"}</Title>
 
-      {id && (
-        <ProfilePicture>
-          {foto ? (
-            <img src={foto} alt={nome} />
-          ) : (
-            <FaUserCircle size={180} />
-          )}
-          <Link to={`fotos/${id}`}>
-            <FaEdit size={24} />
-          </Link>
-        </ProfilePicture>
-      )}
+      {id && (<Fotos/>)}
 
       <Form onSubmit={handleSubmit}>
         <label htmlFor="nome">
