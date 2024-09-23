@@ -16,7 +16,6 @@ import { Persistency } from "./services/persistency";
 import { Product } from "./classes/product";
 import { ShoppingCart } from "./classes/shopping-cart";
 import { NoDiscount } from "./classes/discount";
-
 //const fiftyPercentDiscount = new FiftyPercentDiscount();
 //const tenPercentDiscount = new TenPercentDiscount();
 const noDiscount = new NoDiscount();
@@ -30,6 +29,7 @@ shoppingCart.addItem(new Product("Caderno", 9.9));
 shoppingCart.addItem(new Product("Lápis", 1.59));
 
 console.log(shoppingCart.items);
+console.log(shoppingCart.total());
 console.log(shoppingCart.totalWithDicount());
 console.log(order.orderStatus);
 order.checkout();
